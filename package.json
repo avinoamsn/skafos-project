@@ -1,54 +1,137 @@
 {
-  "name": "skafos-project",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.4",
-    "husky": "^7.0.1"
-  }
+	"name": "skafos-project",
+	"version": "0.1.0",
+	"main": "/",
+	"private": true,
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+		"lint:fix": "eslint --cache --fix",
+		"prepare": "husky install"
+	},
+	"eslintConfig": {
+		"extends": [
+			"plugin:react/recommended",
+			"plugin:@typescript-eslint/recommended",
+			"plugin:prettier/recommended"
+		],
+		"plugins": [
+			"react-hooks",
+			"jam3"
+		],
+		"parser": "@typescript-eslint/parser",
+		"parserOptions": {
+			"project": [
+				"tsconfig.json"
+			]
+		},
+		"ignorePatterns": [
+			"webpack.config.js",
+			"snapshotResolver.js",
+			"tailwind.config.js",
+			"postcss.config.js"
+		],
+		"rules": {
+			"react-hooks/rules-of-hooks": "error",
+			"react-hooks/exhaustive-deps": "warn",
+			"quotes": [
+				1,
+				"backtick"
+			],
+			"react/prop-types": 0,
+			"jam3/no-sanitizer-with-danger": [
+				2,
+				{
+					"wrapperName": [
+						"sanitize"
+					]
+				}
+			],
+			"@typescript-eslint/explicit-function-return-type": [
+				1,
+				{
+					"allowExpressions": true
+				}
+			]
+		},
+		"overrides": [
+			{
+				"files": [
+					"*.d.ts"
+				],
+				"rules": {
+					"quotes": [
+						2,
+						"single"
+					]
+				}
+			}
+		],
+		"settings": {
+			"react": {
+				"version": "detect"
+			}
+		}
+	},
+	"prettier": {
+		"trailingComma": "es5",
+		"useTabs": true,
+		"semi": false,
+		"singleQuote": true
+	},
+	"importSorter": {
+		"trailingComma": "multiLine"
+	},
+	"commitlint": {
+		"extends": [
+			"@commitlint/config-conventional"
+		]
+	},
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx}": "yarn run lint:fix"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"dependencies": {
+		"@testing-library/dom": "^8.1.0",
+		"@testing-library/jest-dom": "^5.14.1",
+		"@testing-library/user-event": "^13.1.9",
+		"@types/jest": "^26.0.24",
+		"@types/node": "^16.0.0",
+		"@types/react": "^17.0.13",
+		"@types/react-dom": "^17.0.8",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-scripts": "4.0.3",
+		"typescript": "^4.3.5",
+		"web-vitals": "^2.1.0"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^12.1.4",
+		"@commitlint/config-conventional": "^12.1.4",
+		"@typescript-eslint/eslint-plugin": "^4.28.2",
+		"@typescript-eslint/parser": "^4.28.2",
+		"eslint": "7.30.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-jam3": "^0.2.3",
+		"eslint-plugin-prettier": "^3.4.0",
+		"eslint-plugin-react": "^7.24.0",
+		"eslint-plugin-react-hooks": "^4.2.0",
+		"husky": "^7.0.1",
+		"lint-staged": "^11.0.0",
+		"prettier": "^2.3.2"
+	}
 }

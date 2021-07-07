@@ -1,16 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Card from './Card';
+import './App.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Card />
-      </header>
-    </div>
-  );
+import React, { ReactElement } from 'react'
+
+import Card from './Card'
+
+export const App = (): ReactElement => {
+	return (
+		<div className="App">
+			<header className="App-header">
+				<Card />
+			</header>
+		</div>
+	)
 }
 
-export default App;
+export default App

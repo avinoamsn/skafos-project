@@ -1,7 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# commt msg
+# commit msg (optional, usefuul when writing large commit msgs/writing commit msgs in real time)
 commit.md
+
+# eslint cache (always generated locally, should never be versioned)
+.eslintcache
 
 # dependencies
 /node_modules
