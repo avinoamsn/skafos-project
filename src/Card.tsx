@@ -1,17 +1,21 @@
 import React, { useRef } from 'react'
+
 import card from './assets/back.png'
 
-export const Card = () => {
+const Card = (): React.ReactElement => {
 	const cardRef = useRef<HTMLImageElement>(null)
 
-	const cardMouseOut = () => {
-		console.log(`mouse out`)
-	} // TODO fix animation speed & blur
-	const cardMouseMove = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+	// ? original card hover logic from: https://codepen.io/richard_w_here/pen/eYmXZMN
+	const cardMouseOut = (): void => {
+		if (cardRef.current === null) return // typesafe check
+		cardRef.current.style.transform = `` // rm hover effect
+	}
+	const cardMouseMove = (
+		e: React.MouseEvent<HTMLImageElement, MouseEvent>
+	): void => {
 		if (cardRef.current === null) return // typesafe check
 
 		// calculate vars that'll be used to update style
-		// ? original card hover logic from: https://codepen.io/richard_w_here/pen/eYmXZMN
 		const xOffset = e.nativeEvent.offsetX
 		const yOffset = e.nativeEvent.offsetY
 		const cardHeight = cardRef.current.clientHeight
@@ -29,17 +33,15 @@ export const Card = () => {
 	}
 
 	return (
-		<div>
-			<img
-				src={card}
-				alt="Yu-Gi-Oh card back"
-				onMouseMove={(e) => cardMouseMove(e)}
-				onMouseOut={cardMouseOut}
-				ref={cardRef}
-			/>
-		</div>
+		<img
+			src={card}
+			alt="Yu-Gi-Oh card back"
+			onMouseMove={(e) => cardMouseMove(e)}
+			onMouseOut={cardMouseOut}
+			ref={cardRef}
+			className="rounded-lg transition-all"
+		/>
 	)
 }
 
-// ? component is exported both as a named & default export for flexibility's sake, and to make it easy for use with barrel files
 export default Card
