@@ -1,16 +1,14 @@
-import './App.css'
+import React, { FC } from 'react'
+import { RecoilRoot } from 'recoil'
 
-import React from 'react'
+import { Card, Search } from './components'
 
-import Card from './Card'
-
-export const App = (): React.ReactElement => {
+export const App: FC = () => {
 	return (
-		<div className="App">
-			<header className="App-header">
-				<Card />
-			</header>
-		</div>
+		<RecoilRoot>
+			<Search />
+			<Card />
+		</RecoilRoot>
 	)
 }
 

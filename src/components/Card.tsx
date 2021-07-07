@@ -1,16 +1,22 @@
-import React, { useRef } from 'react'
+import React, { FC, useRef } from 'react'
 
-import card from './assets/back.png'
+import card from '../assets/back.png'
 
-const Card = (): React.ReactElement => {
+/**
+ * An interactive YugHiOh card. Click it to add it to your deck.
+ *
+ * @note original card mouse-around style logic from: {@link https://codepen.io/richard_w_here/pen/eYmXZMN}
+ * @note component is exported both as a named & default export for flexibility's sake, and to make it easy for use with barrel files
+ */
+export const Card: FC = () => {
 	const cardRef = useRef<HTMLImageElement>(null)
 
-	// ? original card hover logic from: https://codepen.io/richard_w_here/pen/eYmXZMN
-	const cardMouseOut = (): void => {
+	// ANCHOR mouse-around styles
+	const mouseOut = (): void => {
 		if (cardRef.current === null) return // typesafe check
 		cardRef.current.style.transform = `` // rm hover effect
 	}
-	const cardMouseMove = (
+	const mouseOver = (
 		e: React.MouseEvent<HTMLImageElement, MouseEvent>
 	): void => {
 		if (cardRef.current === null) return // typesafe check
@@ -32,14 +38,20 @@ const Card = (): React.ReactElement => {
 		cardRef.current.style.transform = `scale(1.1) rotateX(${rotateXValue}deg) rotateY(${rotateYValue}deg)`
 	}
 
+	// ANCHOR interactivity
+	const addCardToDeck = (): void => {
+		console.log(`clicked!`)
+	}
+
 	return (
 		<img
 			src={card}
 			alt="Yu-Gi-Oh card back"
-			onMouseMove={(e) => cardMouseMove(e)}
-			onMouseOut={cardMouseOut}
+			onMouseMove={(e) => mouseOver(e)}
+			onMouseOut={mouseOut}
+			onClick={addCardToDeck}
 			ref={cardRef}
-			className="rounded-lg transition-all"
+			className="rounded-lg transition-transform duration-200 ease-linear"
 		/>
 	)
 }
