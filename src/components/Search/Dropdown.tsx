@@ -1,8 +1,9 @@
 import React, { FC, Fragment } from 'react'
+import { useRecoilState } from 'recoil'
 import tw from 'tailwind-styled-components'
 
 import { Menu, Transition } from '@headlessui/react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+
 import { deckState } from '../../recoil'
 
 const StyledButton = tw.button<{ active?: boolean }>`

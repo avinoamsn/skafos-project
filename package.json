@@ -3,9 +3,11 @@
 	"version": "0.1.0",
 	"main": "build",
 	"private": true,
+	"homepage": "https://avinoamsn.github.io/skafos-project/",
 	"scripts": {
 		"start": "craco start",
 		"build": "craco build",
+		"predeploy": "yarn build",
 		"deploy": "gh-pages -d build",
 		"test": "craco test",
 		"lint": "eslint src --ext .js,.jsx,.ts,.tsx",
