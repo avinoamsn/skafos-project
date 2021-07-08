@@ -1,14 +1,29 @@
 import React, { FC, useRef } from 'react'
+import styled from 'styled-components'
+import tw from 'tailwind-styled-components'
 
-import card from '../assets/back.png'
+const PositionedCard = styled.img<{ distance: number }>`
+	${({ distance }) =>
+		distance !== 0
+			? `left: ${distance * 1 + (distance > 0 ? 25 : -25)}rem;`
+			: `left: 0`}
+	${({ distance }) => (distance > 0 ? `z-index: -${distance}` : ``)}
+`
+const StyledCard = tw(PositionedCard)`
+${({ distance }) =>
+	distance === 0 ? `-top-6 z-10` : `top-0 pointer-events-none`}
+absolute rounded-lg transition-all duration-200 ease-in-out
+`
 
 /**
  * An interactive YugHiOh card. Click it to add it to your deck.
  *
  * @note original card mouse-around style logic from: {@link https://codepen.io/richard_w_here/pen/eYmXZMN}
- * @note component is exported both as a named & default export for flexibility's sake, and to make it easy for use with barrel files
  */
-export const Card: FC = () => {
+export const Card: FC<{ src: string; distanceFromCursor: number }> = ({
+	src,
+	distanceFromCursor,
+}) => {
 	const cardRef = useRef<HTMLImageElement>(null)
 
 	// ANCHOR mouse-around styles
@@ -38,20 +53,14 @@ export const Card: FC = () => {
 		cardRef.current.style.transform = `scale(1.1) rotateX(${rotateXValue}deg) rotateY(${rotateYValue}deg)`
 	}
 
-	// ANCHOR interactivity
-	const addCardToDeck = (): void => {
-		console.log(`clicked!`)
-	}
-
 	return (
-		<img
-			src={card}
+		<StyledCard
+			src={src}
 			alt="Yu-Gi-Oh card back"
 			onMouseMove={(e) => mouseOver(e)}
 			onMouseOut={mouseOut}
-			onClick={addCardToDeck}
 			ref={cardRef}
-			className="rounded-lg transition-transform duration-200 ease-linear"
+			distance={distanceFromCursor}
 		/>
 	)
 }
