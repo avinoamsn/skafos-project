@@ -4,10 +4,14 @@ import tw from 'tailwind-styled-components'
 
 const PositionedCard = styled.img<{ distance: number }>`
 	${({ distance }) =>
+		// push unfocused cards to either side
 		distance !== 0
 			? `left: ${distance * 1 + (distance > 0 ? 25 : -25)}rem;`
 			: `left: 0`}
-	${({ distance }) => (distance > 0 ? `z-index: -${distance}` : ``)}
+	${
+		// invert z-index for cards in the right-hhand pile
+		({ distance }) => (distance > 0 ? `z-index: -${distance}` : ``)
+	}
 `
 const StyledCard = tw(PositionedCard)`
 ${({ distance }) =>
